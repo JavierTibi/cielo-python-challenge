@@ -32,7 +32,7 @@ class Restful:
 		self.handleError(response.status_code)	
 		print(response.text)
 
-	def postOutput(self, endpoint, data):
+	def postOutput(self, endpoint, data, file):
 		response = requests.post(self.url + endpoint, data)	
 		self.handleError(response.status_code) 
 		self.output(file,response.text)
@@ -42,7 +42,7 @@ class Restful:
 			json.dump(data, outfile)
 
 	def handleError(self, status_code):
-		if status_code == 200:
+		if status_code >= 200 and status_code <= 299:
 			print(status_code)
 		else:
 			print(str(status_code) + '- FAILURE')		
